@@ -15,14 +15,20 @@ using namespace std;
 
 int main() {
   vector<media> medias; //media will be the parent class
-
+  
   cout << "media class" << endl;
   //media* testParent = new media();
   games* newGame = new games(); //passing in values for the new game
 
+  char input[20];
+  cin.getline(input, 20);
+  cout << input << endl;
+  newGame->setTitle(input);
   newGame->setYear(10);
+  
 
   cout << newGame->getYear() << endl;
+  cout << newGame->getTitle() << endl;
 
   
 
@@ -37,7 +43,16 @@ int main() {
 
 
 void Add() { //user able to add media
-  
+  cout << "What type of media do you want to add?" << endl;
+  char input[7];
+  bool validIn = false;
+  while (!validIn) {
+    cin.getline(input, 7);
+    toLowerCase(input);
+    if (strcmp(input, "games") == 0) {
+      //valid
+    }
+  }
 }
 
 void Search() { //user searches through media based on title or year
