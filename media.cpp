@@ -24,6 +24,5 @@ void media::setYear(int year) {
 }
 
 int media::getYear() {
-  cout << "getYear" << endl;
   return year;
 }
