@@ -3,12 +3,14 @@
 #include <vector>
 #include "media.h"
 #include "games.h"
+#include "music.h"
+#include "movies.h"
 
-void AddPrompt(vector<media> &);
-void Add(vector<media> &);
+void AddPrompt(vector<media*> &);
+void Add(vector<media*> &);
 void Search();
 void Delete();
-bool userSelection(vector<media> &);
+bool userSelection(vector<media*> &);
 void setLowerCase(char cstring[]);
 void checkInvalid();
 
@@ -17,7 +19,7 @@ const int MAX_INPUT = 21;
 using namespace std;
 
 int main() {
-  vector<media> medias; //media will be the parent class
+  vector<media*> medias; //media will be the parent class
   
   cout << "media class" << endl;
   //media* testParent = new media();
@@ -45,39 +47,115 @@ int main() {
 }
 
 
-void Add(vector<media> &medias, int m) { //user adds stuff to selected media field
+void Add(vector<media*> &medias, int m) { //user adds stuff to selected media field
   char input[MAX_INPUT];
   int yearIn = 0;
   float ratingIn = 0.00;
+  int durationIn = 0;
   
   if (m == 1) {
   games* newGame = new games();
   cout << "Title: " << endl;
   cin.getline(input, MAX_INPUT);
   newGame->setTitle(input);
-  cout << "Year: " << endl;
-  cin >> yearIn;
-  cin.ignore();
-  newGame->setYear(yearIn);
+
   cout << "Publisher: " << endl;
   cin.getline(input, MAX_INPUT);
   newGame->setPublisher(input);
+
+  cout << "Year: " << endl;
+  cin >> yearIn;
+  newGame->setYear(yearIn);
+
   cout << "Rating: " << endl;
   cin >> ratingIn;
-  cin.ignore();
   newGame->setRating(ratingIn);
 
+  cin.ignore();
+
+  medias.push_back(newGame); 
   cout << "debug" << endl;
   } else if (m == 2) {
-    
-    
-  } else if (m == 3) {
+    //Music
+    music* newSong = new music();
 
+    cout << "Title: " << endl;
+    cin.getline(input, MAX_INPUT);
+    newSong->setTitle(input);
+    
+    cout << "Artist: " << endl;
+    cin.getline(input, MAX_INPUT);
+    newSong->setArtist(input);
+
+    cout << "Year: " << endl;
+    cin >> yearIn;
+    newSong->setYear(yearIn);
+
+    cout << "Duration (in seconds): " << endl;
+    cin >> durationIn;
+    newSong->setDuration(durationIn);
+    
+    cout << "Rating: " << endl;
+    cin >> ratingIn;
+    newSong->setRating(ratingIn);
+
+    cin.ignore();
+
+    medias.push_back(newSong);
+    cout << "debug" << endl;
+  } else if (m == 3) {
+    //Movies
+    movies* newMovie = new movies();
+    cout << "Title: " << endl;
+    cin.getline(input, MAX_INPUT);
+    newMovie->setTitle(input);
+    
+    cout << "Director: " << endl;
+    cin.getline(input, MAX_INPUT);
+    newMovie->setDirector(input);
+
+    cout << "Year: " << endl;
+    cin >> yearIn;
+    newMovie->setYear(yearIn);
+    
+    cout << "Duration (in minutes): " << endl;
+    cin >> durationIn; 
+    newMovie->setDuration(durationIn);
+    
+    cout << "Rating: " << endl;
+    cin >> ratingIn;
+    newMovie->setRating(ratingIn);
+
+    cin.ignore();
+
+    medias.push_back(newMovie);
+    cout << "debug" << endl;
   }
 }
 
 void Search() { //user searches through media based on title or year
+  char input;
+  char titleIn;
+  int yearIn = 0;
+  bool isValid = false;
+  
 
+  while (!isValid) {
+  cout << "Do you want to search for a title or a year?" << endl;
+  cin.getline(input, MAX_INPUT);
+ 
+  cout << "Title: " << endl;
+  cin.getline(titleIn, MAX_INPUT);
+
+  cout << "Year: " << endl;
+  cin >> yearIn;
+  cin.ignore();
+
+  
+   for (vector<Student*>::iterator it = stuVec.begin(); it != stuVec.end(); it++) {
+     if ((*it)->
+   }
+  }
 }
 
 void Delete() { //user can delete an item (using destructor!!) using the same search functionality.
@@ -85,7 +163,7 @@ void Delete() { //user can delete an item (using destructor!!) using the same se
 }
 
 //Menu where user selects what they want to do.
-bool userSelection(vector<media> &medias) {
+bool userSelection(vector<media*> &medias) {
   bool validIn = false;
   while (!validIn) {
     char input[7]; 
@@ -116,7 +194,7 @@ bool userSelection(vector<media> &medias) {
   return false; //default keep looping through program. 
 }
 
-void AddPrompt(vector<media> &medias) { //User selects which media to add (in new function to reduce clutter)
+void AddPrompt(vector<media*> &medias) { //User selects which media to add (in new function to reduce clutter)
   cout << "What type of media do you want to add?" << endl;
   char input[7];
   bool validIn = false;
@@ -126,10 +204,10 @@ void AddPrompt(vector<media> &medias) { //User selects which media to add (in ne
     if (strcmp(input, "games") == 0) {
       validIn = true;
       Add(medias, 1);
-    } else if (strcmp(input, "movies") == 0) {
+    } else if (strcmp(input, "music") == 0) {
        validIn = true;
        Add(medias, 2);
-    } else if (strcmp(input, "music") == 0) {
+    } else if (strcmp(input, "movies") == 0) {
        validIn = true;
        Add(medias, 3);
     } else {

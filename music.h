@@ -3,10 +3,19 @@
 
 using namespace std;
 
-class music {
+class music : public media {
  public:
   music();
+
+  void setArtist(char artist[]);
+  char* getArtist();
+  void setDuration(int duration);
+  int getDuration();
+  void setRating(float rating);
+  float getRating();
+
+private:
   char artist[20];
-  float duration;
+  int duration;
   float rating;
 };
