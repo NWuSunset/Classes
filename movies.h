@@ -13,11 +13,12 @@ class movies : public media {
   int getDuration();
   void setRating(float rating);
   float getRating();
-
+  void printData();
   
 private:
   char director[20];
-  int year;
   int duration;
+  int hours;
+  int minutes;
   float rating;
 };

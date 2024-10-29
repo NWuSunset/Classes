@@ -23,3 +23,13 @@ void games::setRating(float rating) {
 float games::getRating() {
   return rating;
 }
+
+void games::printData() {
+  cout << "GAME: " << endl;
+  cout << title << endl;
+  cout << publisher << endl;
+  cout << year << endl;
+  cout << rating << endl;
+
+  cout << "--------------" << endl;
+}

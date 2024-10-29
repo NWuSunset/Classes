@@ -32,3 +32,20 @@ float music::getRating() {
 }
 
 
+void music::printData() {
+  cout << "MUSIC: " << endl;
+  cout << title << endl;
+
+  minutes = duration / 60;
+  seconds = duration % 60;
+  cout << minutes << "m " << seconds << "s" << endl;
+  
+  cout << artist << endl;
+  cout << year << endl;
+  cout << rating << endl;
+
+  cout << "--------------" << endl;
+}
+
+
+

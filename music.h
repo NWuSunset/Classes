@@ -13,9 +13,12 @@ class music : public media {
   int getDuration();
   void setRating(float rating);
   float getRating();
-
+  void printData();
+  
 private:
   char artist[20];
   int duration;
+  int minutes;
+  int seconds;
   float rating;
 };

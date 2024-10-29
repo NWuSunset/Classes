@@ -8,7 +8,7 @@
 
 void AddPrompt(vector<media*> &);
 void Add(vector<media*> &);
-void Search();
+void Search(vector<media*> &);
 void Delete();
 bool userSelection(vector<media*> &);
 void setLowerCase(char cstring[]);
@@ -21,27 +21,7 @@ using namespace std;
 int main() {
   vector<media*> medias; //media will be the parent class
   
-  cout << "media class" << endl;
-  //media* testParent = new media();
-  games* newGame = new games(); //passing in values for the new game
-
-  char input[MAX_INPUT];
-  cin.getline(input, MAX_INPUT);
-  cout << input << endl;
-  newGame->setTitle(input);
-  newGame->setYear(10);
-  
-
-  cout << newGame->getYear() << endl;
-  cout << newGame->getTitle() << endl;
-
-  
-
-  //create a test piece of media
-  
-  while (!userSelection(medias)); //keep running prgram until user enters quit 
-
-  
+  while (!userSelection(medias)); //keep running prgram until user enters quit
   
   return 0;
 }
@@ -133,28 +113,45 @@ void Add(vector<media*> &medias, int m) { //user adds stuff to selected media fi
   }
 }
 
-void Search() { //user searches through media based on title or year
-  char input;
-  char titleIn;
+void Search(vector<media*> &medias) { //user searches through media based on title or year
+  char input[MAX_INPUT];
+  char titleIn[MAX_INPUT];
   int yearIn = 0;
   bool isValid = false;
   
 
-  while (!isValid) {
   cout << "Do you want to search for a title or a year?" << endl;
   cin.getline(input, MAX_INPUT);
- 
+  
+  setLowerCase(input);
+  if (strcmp(input, "title") == 0) { 
   cout << "Title: " << endl;
   cin.getline(titleIn, MAX_INPUT);
+  cout << " " << endl;
+  for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
+    if (strcmp((*it)->getTitle(), titleIn) == 0) {
+      (*it)->printData();
+      isValid = true;
+    }
+   }
+  }
 
+  if (strcmp(input, "year") == 0) {
   cout << "Year: " << endl;
   cin >> yearIn;
   cin.ignore();
+  cout << " " << endl;
 
-  
-   for (vector<Student*>::iterator it = stuVec.begin(); it != stuVec.end(); it++) {
-     if ((*it)->
-   }
+  for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
+    if ((*it)->getYear() == yearIn) {
+      (*it)->printData();
+      isValid = true;
+    }   
+  }
+ }
+
+  if (!isValid) { //If invalid input (or the title/year isn't in database)
+    cout << "Input is invalid or there are no matches in the database" << endl;
   }
 }
 
@@ -165,7 +162,6 @@ void Delete() { //user can delete an item (using destructor!!) using the same se
 //Menu where user selects what they want to do.
 bool userSelection(vector<media*> &medias) {
   bool validIn = false;
-  while (!validIn) {
     char input[7]; 
     char usrChoice;
     cout << "Add (a), Search for (s), or Delete (d) media. Quit (q)" << endl;
@@ -180,7 +176,7 @@ bool userSelection(vector<media*> &medias) {
       AddPrompt(medias);
     } else if (strcmp(input, "search") == 0 || strcmp(input, "s") == 0) {
       validIn = true;
-      Search();
+      Search(medias);
     } else if (strcmp(input, "delete") == 0 || strcmp(input, "d") == 0) {
       validIn = true;
       Delete();
@@ -189,8 +185,6 @@ bool userSelection(vector<media*> &medias) {
     } else {
       cout << "invalid input" << endl;
     }
-    checkInvalid(); //checks for input that break the program.
-  }
   return false; //default keep looping through program. 
 }
 
@@ -207,7 +201,7 @@ void AddPrompt(vector<media*> &medias) { //User selects which media to add (in n
     } else if (strcmp(input, "music") == 0) {
        validIn = true;
        Add(medias, 2);
-    } else if (strcmp(input, "movies") == 0) {
+    } else if (strcmp(input, "movie") == 0) {
        validIn = true;
        Add(medias, 3);
     } else {

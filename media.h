@@ -13,10 +13,11 @@ class media {
 
   //Common methods
   void setTitle(char title[]);
-  char* getTitle();
+  virtual char* getTitle();
   void setYear(int year);
-  int getYear();
-
+  virtual int getYear();
+  virtual void printData();
+  
 protected: //common variables
   char title[20];
   int year;

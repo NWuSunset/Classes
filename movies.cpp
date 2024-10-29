@@ -31,3 +31,19 @@ float movies::getRating() {
   return rating;
 }
 
+void movies::printData() {
+  cout << "MOVIE: " << endl;
+
+  cout << title << endl;
+
+  hours = duration / 60;
+  minutes = duration % 60;
+  cout << hours << "h " << minutes << "m" << endl; //prints out in hours+minutes
+
+  cout << director << endl;
+  cout << year << endl;
+  cout << rating << endl;
+
+  cout << "--------------" << endl;
+}
+

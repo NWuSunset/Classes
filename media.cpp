@@ -14,7 +14,7 @@ void media::setTitle(char title[]) {
   strcpy(this->title, title); //copy the input title to this title (since arrays are by reference we don't want to break it). 
 }
 
-virtual char* media::getTitle() { //can return char pointer
+char* media::getTitle() { //(Virtual) can return char pointer
   char* toReturn = title; //set the title array to 
   return toReturn;
 }
@@ -23,6 +23,10 @@ void media::setYear(int year) {
   this->year = year; //year is of pointer type media* (need to use a pointer thing) 
 }
 
-virtual int media::getYear() {
+int media::getYear() { //Virtual
   return year;
+}
+
+void media::printData() { //Virutal
+  cout << "PARENT PRINT DATA" << endl;
 }
