@@ -14,6 +14,8 @@ class music : public media {
   void setRating(float rating);
   float getRating();
   void printData();
+
+  ~music();
   
 private:
   char artist[20];

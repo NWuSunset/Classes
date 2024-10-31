@@ -15,7 +15,8 @@ class games : public media {
   void setRating(float rating);
   float getRating();
   void printData();
-  
+
+  ~games();
 private:
   char publisher[20];
   float rating;

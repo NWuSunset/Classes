@@ -14,7 +14,8 @@ class movies : public media {
   void setRating(float rating);
   float getRating();
   void printData();
-  
+
+  ~movies();
 private:
   char director[20];
   int duration;

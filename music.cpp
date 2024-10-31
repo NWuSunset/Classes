@@ -47,5 +47,9 @@ void music::printData() {
   cout << "--------------" << endl;
 }
 
+music::~music() {
+  delete[] artist;
+}
+
 
 

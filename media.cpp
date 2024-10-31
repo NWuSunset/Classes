@@ -30,3 +30,7 @@ int media::getYear() { //Virtual
 void media::printData() { //Virutal
   cout << "PARENT PRINT DATA" << endl;
 }
+
+media::~media () {
+  delete[] title; //delete the title char array since it may still be stored even when the object is removed
+}

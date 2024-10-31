@@ -47,3 +47,7 @@ void movies::printData() {
   cout << "--------------" << endl;
 }
 
+movies::~movies() {
+  delete[] director;
+}
+

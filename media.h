@@ -13,10 +13,12 @@ class media {
 
   //Common methods
   void setTitle(char title[]);
-  virtual char* getTitle();
+  char* getTitle();
   void setYear(int year);
-  virtual int getYear();
+  int getYear();
   virtual void printData();
+
+  virtual ~media(); //destructor
   
 protected: //common variables
   char title[20];

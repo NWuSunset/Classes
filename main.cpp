@@ -9,7 +9,7 @@
 void AddPrompt(vector<media*> &);
 void Add(vector<media*> &);
 void Search(vector<media*> &);
-void Delete();
+void Delete(vector<media*> &);
 bool userSelection(vector<media*> &);
 void setLowerCase(char cstring[]);
 void checkInvalid();
@@ -155,7 +155,78 @@ void Search(vector<media*> &medias) { //user searches through media based on tit
   }
 }
 
-void Delete() { //user can delete an item (using destructor!!) using the same search functionality.
+void Delete(vector<media*> &medias) { //user can delete an item (using destructor!!) using the same search functionality.
+  char input[MAX_INPUT];
+  char titleIn[MAX_INPUT];
+  int yearIn = 0;
+  bool isValid = false;
+
+  
+  cout << "Search using title or year?" << endl;
+  cin.getline(input, MAX_INPUT);
+  setLowerCase(input);
+
+  if (strcmp(input, "year") == 0) {
+      cout << "Year: " << endl;
+      cin >> yearIn;
+      cin.ignore();
+      cout << " " << endl;
+   for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
+     if ((*it)->getYear() == yearIn) {
+       cout << "Are you sure you want to delete this from the database?" << endl;
+       char answ[MAX_INPUT];
+       cin.getline(answ, MAX_INPUT);
+       setLowerCase(input);
+       (*it)->printData();
+       
+        if (strcmp(input, "yes") == 0) {
+         delete *it;
+         medias.erase(it);
+         return;
+       }
+
+
+       
+       isValid = true;
+    }
+  }
+
+ }
+
+  if (strcmp(input, "title") == 0) {
+    cout << "Title: " << endl;
+    cin.getline(titleIn, MAX_INPUT);
+    cout << " " << endl;
+      for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
+	if (strcmp((*it)->getTitle(), titleIn) == 0) {
+      cout << "Are you sure you want to delete these things from the database? (yes/no)" << endl;
+       char answ[MAX_INPUT];
+       cin.getline(answ, MAX_INPUT);
+       setLowerCase(input);
+       (*it)->printData();
+       
+       if (strcmp(input, "yes") == 0 || strcmp(input, "y") == 0) {
+	 delete *it;
+	 medias.erase(it);
+	 return;
+       }
+
+      
+    
+      isValid = true;
+     }
+    }
+  }
+ 
+
+
+
+  if (!isValid) { //If invalid input (or the title/year isn't in database)
+    cout << "Input is invalid or there are no matches in the database" << endl;
+  }
+
+  
+  
 
 }
 
@@ -179,7 +250,7 @@ bool userSelection(vector<media*> &medias) {
       Search(medias);
     } else if (strcmp(input, "delete") == 0 || strcmp(input, "d") == 0) {
       validIn = true;
-      Delete();
+      Delete(medias);
     } else if (strcmp(input, "quit") == 0 || strcmp(input, "q") == 0) {
       return true; //bool returns true is we want to exit the program.
     } else {

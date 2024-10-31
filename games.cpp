@@ -33,3 +33,8 @@ void games::printData() {
 
   cout << "--------------" << endl;
 }
+
+
+games::~games() {
+  delete[] publisher; //rem char arrays
+}
