@@ -49,6 +49,6 @@ void movies::printData() {
 
 movies::~movies() {
   cout << "MOVIE DECONSTRUCTOR" << endl;
-  delete[] director;
+  //delete[] director;
 }
 

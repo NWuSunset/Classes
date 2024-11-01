@@ -49,7 +49,7 @@ void music::printData() {
 
 music::~music() {
   cout << "MUSIC DECONSTRUCTOR" << endl;
-  delete[] artist;
+  //delete[] artist;
 }
 
 

@@ -36,27 +36,26 @@ void Add(vector<media*> &medias, int m) { //user adds stuff to selected media fi
   int durationIn = 0;
   
   if (m == 1) {
-  games* newGame = new games();
-  cout << "Title: " << endl;
-  cin.getline(input, MAX_INPUT);
-  newGame->setTitle(input);
+    games* newGame = new games();
+    cout << "Title: " << endl;
+    cin.getline(input, MAX_INPUT);
+    newGame->setTitle(input);
 
-  cout << "Publisher: " << endl;
-  cin.getline(input, MAX_INPUT);
-  newGame->setPublisher(input);
+    cout << "Publisher: " << endl;
+    cin.getline(input, MAX_INPUT);
+    newGame->setPublisher(input);
 
-  cout << "Year: " << endl;
-  cin >> yearIn;
-  newGame->setYear(yearIn);
+    cout << "Year: " << endl;
+    cin >> yearIn;
+    newGame->setYear(yearIn);
 
-  cout << "Rating: " << endl;
-  cin >> ratingIn;
-  newGame->setRating(ratingIn);
+    cout << "Rating: " << endl;
+    cin >> ratingIn;
+    newGame->setRating(ratingIn);
 
-  cin.ignore();
+    cin.ignore();
 
-  medias.push_back(newGame); 
-  cout << "debug" << endl;
+    medias.push_back(newGame); 
   } else if (m == 2) {
     //Music
     music* newSong = new music();
@@ -84,7 +83,6 @@ void Add(vector<media*> &medias, int m) { //user adds stuff to selected media fi
     cin.ignore();
 
     medias.push_back(newSong);
-    cout << "debug" << endl;
   } else if (m == 3) {
     //Movies
     movies* newMovie = new movies();
@@ -111,7 +109,6 @@ void Add(vector<media*> &medias, int m) { //user adds stuff to selected media fi
     cin.ignore();
 
     medias.push_back(newMovie);
-    cout << "debug" << endl;
   }
 }
 
@@ -127,30 +124,30 @@ void Search(vector<media*> &medias) { //user searches through media based on tit
   
   setLowerCase(input);
   if (strcmp(input, "title") == 0) { 
-  cout << "Title: " << endl;
-  cin.getline(titleIn, MAX_INPUT);
-  cout << " " << endl;
-  for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
-    if (strcmp((*it)->getTitle(), titleIn) == 0) {
-      (*it)->printData();
-      isValid = true;
+    cout << "Title: " << endl;
+    cin.getline(titleIn, MAX_INPUT);
+    cout << " " << endl;
+    for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
+      if (strcmp((*it)->getTitle(), titleIn) == 0) {
+	(*it)->printData();
+	isValid = true;
+      }
     }
-   }
   }
 
   if (strcmp(input, "year") == 0) {
-  cout << "Year: " << endl;
-  cin >> yearIn;
-  cin.ignore();
-  cout << " " << endl;
+    cout << "Year: " << endl;
+    cin >> yearIn;
+    cin.ignore();
+    cout << " " << endl;
 
-  for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
-    if ((*it)->getYear() == yearIn) {
-      (*it)->printData();
-      isValid = true;
-    }   
+    for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
+      if ((*it)->getYear() == yearIn) {
+	(*it)->printData();
+	isValid = true;
+      }   
+    }
   }
- }
 
   if (!isValid) { //If invalid input (or the title/year isn't in database)
     cout << "Input is invalid or there are no matches in the database" << endl;
@@ -173,86 +170,77 @@ void Delete(vector<media*> &medias) { //user can delete an item (using destructo
       cin >> yearIn;
       cin.ignore();
       cout << " " << endl;
-   for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
-     if ((*it)->getYear() == yearIn) {
-       (*it)->printData();
-       cout << "Are you sure you want to delete this from the database?" << endl;
-       char answ[MAX_INPUT];
-       cin.getline(answ, MAX_INPUT);
-       setLowerCase(input);
+      for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
+	if ((*it)->getYear() == yearIn) {
+	  isValid = true;
+	  (*it)->printData();
+	  cout << "Are you sure you want to delete this from the database?" << endl;
+	  char answ[MAX_INPUT];
+	  cin.getline(answ, MAX_INPUT);
+	  setLowerCase(input);
        
-       if (strcmp(answ, "yes") == 0 || strcmp(answ, "y" ) == 0) { 
-	 delete *it;
-	 medias.erase(it);
-         return;
-       }
-       isValid = true;
-    }
+	  if (strcmp(answ, "yes") == 0 || strcmp(answ, "y" ) == 0) { 
+	    delete *it;
+	    medias.erase(it);
+	    return;
+	  }
+	}
+      }
   }
-
- }
 
   if (strcmp(input, "title") == 0) {
     cout << "Title: " << endl;
     cin.getline(titleIn, MAX_INPUT);
     cout << " " << endl;
-      for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
-	if (strcmp((*it)->getTitle(), titleIn) == 0) {
-	   (*it)->printData();
-	  cout << "Are you sure you want to delete these things from the database? (yes/no)" << endl;
-	  char answ[MAX_INPUT];
-	  cin.getline(answ, MAX_INPUT);
-	  setLowerCase(input);
-       
-	  if (strcmp(answ, "yes") == 0 || strcmp(answ, "y") == 0) {
-	    cout << "removing media..." << endl;
-	    delete *it;
-	    medias.erase(it);
-	    break;
-	  }
-	  isValid = true;
+    for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
+      if (strcmp((*it)->getTitle(), titleIn) == 0) {
+	isValid = true;
+	(*it)->printData();
+	cout << "Are you sure you want to delete these things from the database? (yes/no)" << endl;
+	char answ[MAX_INPUT];
+	cin.getline(answ, MAX_INPUT);
+	setLowerCase(input);          
+	  
+	if (strcmp(answ, "yes") == 0 || strcmp(answ, "y") == 0) {
+	  cout << "removing media..." << endl;
+	  delete *it;
+	  medias.erase(it);
+	  return;
 	}
       }
+    }
   }
- 
-
-
-
   if (!isValid) { //If invalid input (or the title/year isn't in database)
     cout << "Input is invalid or there are no matches in the database" << endl;
   }
-
-  
-  
-
 }
 
 //Menu where user selects what they want to do.
 bool userSelection(vector<media*> &medias) {
   bool validIn = false;
-    char input[7]; 
-    char usrChoice;
-    cout << "Add (a), Search for (s), or Delete (d) media. Quit (q)" << endl;
-    
-    cin.get(input, 7);
-    setLowerCase(input); //set the letters of the input to lowercase
-    cin.ignore(); //prevent extra return
-    
-    //Checks which input the user did.
-    if (strcmp(input, "add") == 0 || strcmp(input, "a") == 0) {
-      validIn = true;
-      AddPrompt(medias);
-    } else if (strcmp(input, "search") == 0 || strcmp(input, "s") == 0) {
-      validIn = true;
-      Search(medias);
-    } else if (strcmp(input, "delete") == 0 || strcmp(input, "d") == 0) {
-      validIn = true;
-      Delete(medias);
-    } else if (strcmp(input, "quit") == 0 || strcmp(input, "q") == 0) {
-      return true; //bool returns true is we want to exit the program.
-    } else {
-      cout << "invalid input" << endl;
-    }
+  char input[7]; 
+  char usrChoice;
+  cout << "Add (a), Search for (s), or Delete (d) media. Quit (q)" << endl;
+  
+  cin.get(input, 7);
+  setLowerCase(input); //set the letters of the input to lowercase
+  cin.ignore(); //prevent extra return
+  
+  //Checks which input the user did.
+  if (strcmp(input, "add") == 0 || strcmp(input, "a") == 0) {
+    validIn = true;
+    AddPrompt(medias);
+  } else if (strcmp(input, "search") == 0 || strcmp(input, "s") == 0) {
+    validIn = true;
+    Search(medias);
+  } else if (strcmp(input, "delete") == 0 || strcmp(input, "d") == 0) {
+    validIn = true;
+    Delete(medias);
+  } else if (strcmp(input, "quit") == 0 || strcmp(input, "q") == 0) {
+    return true; //bool returns true is we want to exit the program.
+  } else {
+    cout << "invalid input" << endl;
+  }
   return false; //default keep looping through program. 
 }
 
@@ -263,15 +251,15 @@ void AddPrompt(vector<media*> &medias) { //User selects which media to add (in n
   while (!validIn) {
     cin.getline(input, 7);
     setLowerCase(input);
-    if (strcmp(input, "games") == 0) {
+    if (strcmp(input, "game") == 0) {
       validIn = true;
       Add(medias, 1);
     } else if (strcmp(input, "music") == 0) {
-       validIn = true;
-       Add(medias, 2);
+      validIn = true;
+      Add(medias, 2);
     } else if (strcmp(input, "movie") == 0) {
-       validIn = true;
-       Add(medias, 3);
+      validIn = true;
+      Add(medias, 3);
     } else {
       cout << "Invalid Input" << endl;
     }
@@ -281,11 +269,11 @@ void AddPrompt(vector<media*> &medias) { //User selects which media to add (in n
 
 
 //Pass in an array by reference, to change all contents to lowercase
- void setLowerCase(char cstring[]) {
-   for (int i = 0; i != strlen(cstring); i++) { //loop until string end
-     cstring[i] = tolower(cstring[i]); //set the char here to lowercase
-   }
- }
+void setLowerCase(char cstring[]) {
+  for (int i = 0; i != strlen(cstring); i++) { //loop until string end
+    cstring[i] = tolower(cstring[i]); //set the char here to lowercase
+  }
+}
 
 void checkInvalid() {
   while (cin.fail()) {
