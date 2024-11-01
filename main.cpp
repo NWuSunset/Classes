@@ -21,7 +21,9 @@ using namespace std;
 int main() {
   vector<media*> medias; //media will be the parent class
   
-  while (!userSelection(medias)); //keep running prgram until user enters quit
+  while (!userSelection(medias)) {
+    checkInvalid();
+  } //keep running prgram until user enters quit
   
   return 0;
 }
@@ -173,20 +175,17 @@ void Delete(vector<media*> &medias) { //user can delete an item (using destructo
       cout << " " << endl;
    for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
      if ((*it)->getYear() == yearIn) {
+       (*it)->printData();
        cout << "Are you sure you want to delete this from the database?" << endl;
        char answ[MAX_INPUT];
        cin.getline(answ, MAX_INPUT);
        setLowerCase(input);
-       (*it)->printData();
        
-        if (strcmp(input, "yes") == 0) {
-         delete *it;
-         medias.erase(it);
+       if (strcmp(answ, "yes") == 0 || strcmp(answ, "y" ) == 0) { 
+	 delete *it;
+	 medias.erase(it);
          return;
        }
-
-
-       
        isValid = true;
     }
   }
@@ -199,23 +198,21 @@ void Delete(vector<media*> &medias) { //user can delete an item (using destructo
     cout << " " << endl;
       for (vector<media*>::iterator it = medias.begin(); it != medias.end(); it++) {
 	if (strcmp((*it)->getTitle(), titleIn) == 0) {
-      cout << "Are you sure you want to delete these things from the database? (yes/no)" << endl;
-       char answ[MAX_INPUT];
-       cin.getline(answ, MAX_INPUT);
-       setLowerCase(input);
-       (*it)->printData();
+	   (*it)->printData();
+	  cout << "Are you sure you want to delete these things from the database? (yes/no)" << endl;
+	  char answ[MAX_INPUT];
+	  cin.getline(answ, MAX_INPUT);
+	  setLowerCase(input);
        
-       if (strcmp(input, "yes") == 0 || strcmp(input, "y") == 0) {
-	 delete *it;
-	 medias.erase(it);
-	 return;
-       }
-
-      
-    
-      isValid = true;
-     }
-    }
+	  if (strcmp(answ, "yes") == 0 || strcmp(answ, "y") == 0) {
+	    cout << "removing media..." << endl;
+	    delete *it;
+	    medias.erase(it);
+	    break;
+	  }
+	  isValid = true;
+	}
+      }
   }
  
 

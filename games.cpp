@@ -36,5 +36,6 @@ void games::printData() {
 
 
 games::~games() {
+  cout << "GAMES DECONSTRUCTOR" << endl;
   delete[] publisher; //rem char arrays
 }
