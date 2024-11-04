@@ -28,7 +28,7 @@ int media::getYear() { //Virtual
 }
 
 void media::printData() { //Virutal
-  cout << "PARENT PRINT DATA" << endl;
+  //cout << "PARENT PRINT DATA" << endl;
 }
 
 media::~media () {
