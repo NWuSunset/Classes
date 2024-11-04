@@ -174,12 +174,13 @@ void Delete(vector<media*> &medias) { //user can delete an item (using destructo
 	if ((*it)->getYear() == yearIn) {
 	  isValid = true;
 	  (*it)->printData();
-	  cout << "Are you sure you want to delete this from the database?" << endl;
+	  cout << "Are you sure you want to delete this from the database? (yes/no)" << endl;
 	  char answ[MAX_INPUT];
 	  cin.getline(answ, MAX_INPUT);
 	  setLowerCase(input);
        
 	  if (strcmp(answ, "yes") == 0 || strcmp(answ, "y" ) == 0) { 
+	    cout << "removing media..." << endl;
 	    delete *it;
 	    medias.erase(it);
 	    return;
@@ -224,7 +225,7 @@ bool userSelection(vector<media*> &medias) {
   
   cin.get(input, 7);
   setLowerCase(input); //set the letters of the input to lowercase
-  cin.ignore(); //prevent extra return
+  cin.ignore(80, '\n'); //prevent extra return
   
   //Checks which input the user did.
   if (strcmp(input, "add") == 0 || strcmp(input, "a") == 0) {
@@ -261,9 +262,8 @@ void AddPrompt(vector<media*> &medias) { //User selects which media to add (in n
       validIn = true;
       Add(medias, 3);
     } else {
-      cout << "Invalid Input" << endl;
+      checkInvalid();
     }
-    checkInvalid();
   }
 }
 
@@ -276,6 +276,7 @@ void setLowerCase(char cstring[]) {
 }
 
 void checkInvalid() {
+  cin.ignore(100, '\n');
   while (cin.fail()) {
     cin.clear();
     //cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -283,3 +284,4 @@ void checkInvalid() {
     cout << "You entered an invalid input. Try again" << endl;
   }
 }
+

@@ -4,7 +4,7 @@
 using namespace std;
 
 games::games() {
-  cout << "games!" << endl;
+  //cout << "games!" << endl;
 }
 
 void games::setPublisher(char publisher[]) {
@@ -36,6 +36,6 @@ void games::printData() {
 
 
 games::~games() {
-  cout << "GAMES DECONSTRUCTOR" << endl;
-  //  delete[] publisher; //rem char arrays
+  //cout << "GAMES DECONSTRUCTOR" << endl;
+  //  delete[] publisher; //rem char arrays (Removed due to program Aborting when it hits this line)
 }

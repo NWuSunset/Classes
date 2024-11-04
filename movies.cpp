@@ -1,7 +1,7 @@
 #include "movies.h"
 
 movies::movies() {
-  cout << "movies Constructor" << endl;
+  //  cout << "movies Constructor" << endl;
 }
 
 void movies::setDirector(char director[]) {
@@ -48,7 +48,7 @@ void movies::printData() {
 }
 
 movies::~movies() {
-  cout << "MOVIE DECONSTRUCTOR" << endl;
+  //  cout << "MOVIE DECONSTRUCTOR" << endl;
   //delete[] director;
 }
 

@@ -1,7 +1,7 @@
 #include "music.h"
 
 music::music() {
-  cout << "Music Constructor" << endl;
+  //cout << "Music Constructor" << endl;
 }
 
 void music::setArtist(char artist[]) {
@@ -48,7 +48,7 @@ void music::printData() {
 }
 
 music::~music() {
-  cout << "MUSIC DECONSTRUCTOR" << endl;
+  //  cout << "MUSIC DECONSTRUCTOR" << endl;
   //delete[] artist;
 }
 

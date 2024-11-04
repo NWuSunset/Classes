@@ -5,7 +5,7 @@
 
 media::media() {
   //Will have common methods: title, year
-  cout << "Media Constructor" << endl;
+  //  cout << "Media Constructor" << endl;
   
 }
 
@@ -32,6 +32,6 @@ void media::printData() { //Virutal
 }
 
 media::~media () {
-  cout << "MEDIA DECONSTRUCTOR";
+  //  cout << "MEDIA DECONSTRUCTOR";
   delete[] title; //delete the title char array since it may still be stored even when the object is removed
 }
